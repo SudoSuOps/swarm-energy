@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>SwarmEnergy — Refinery &amp; Tribunal | Swarm &amp; Bee</title>
-  <meta name="description" content="Live agent refinery. Microscalers bring compute. The tribunal rules on every pair through the 6+1 gates — Royal Jelly, Honey, Propolis, or eliminated. Full provenance anchored to Hedera." />
+  <meta name="description" content="Live agent refinery. Microscalers bring compute. The 6+1 gate tribunal rules on every pair — Royal Jelly, Honey, Propolis, or eliminated. Full provenance anchored to Hedera." />
   <link rel="canonical" href="https://swarmenergy.xyz/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://swarmenergy.xyz/" />
   <meta property="og:title" content="SwarmEnergy — Refinery &amp; Tribunal" />
-  <meta property="og:description" content="Where compute becomes classified intelligence. Live mempool-hive + 6+1 gate tribunal. Capped at 21M virgin agents." />
+  <meta property="og:description" content="Where compute becomes classified intelligence. Honeycomb mempool + 6+1 gate tribunal. Capped at 21M virgin agents." />
   <meta name="robots" content="index, follow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,10 +19,10 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --bg:#0a0a0a; --bg-2:#060606; --panel:#111111; --panel-2:#0d0d0d;
+      --bg:#0a0a0a; --bg-2:#060606; --panel:#111; --panel-2:#0d0d0d;
       --line:#1c1c1c; --line-2:#262626;
       --text:#ededed; --muted:#8a8a8a; --muted-2:#555;
-      --accent:#ffffff; --green:#4ade80; --amber:#fbbf24; --red:#ef4444; --gold:#f5c542;
+      --accent:#fff; --green:#4ade80; --amber:#fbbf24; --red:#ef4444; --gold:#f5c542;
       --mono:"JetBrains Mono",ui-monospace,monospace;
       --sans:Inter,ui-sans-serif,system-ui,sans-serif;
     }
@@ -32,7 +32,7 @@
 
     /* ── Topbar ── */
     .topbar{
-      position:sticky; top:0; z-index:30;
+      position:sticky;top:0;z-index:30;
       display:flex;align-items:center;justify-content:space-between;gap:16px;
       padding:12px 20px;border-bottom:1px solid var(--line);
       background:rgba(10,10,10,0.92);backdrop-filter:blur(10px);
@@ -41,22 +41,20 @@
     .brand-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 14px var(--accent)}
     .brand-sub{color:var(--muted);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;margin-left:8px}
     .topnav{display:flex;gap:4px;align-items:center}
-    .topnav a{
-      font-size:12px;color:var(--muted);padding:6px 12px;border-radius:6px;
-      transition:color .15s,background .15s;
-    }
+    .topnav a{font-size:12px;color:var(--muted);padding:6px 12px;border-radius:6px;transition:color .15s,background .15s}
     .topnav a:hover{color:var(--text);background:var(--line)}
     .topnav a.cta{background:var(--accent);color:#000;font-weight:700;padding:7px 14px}
     .topnav a.cta:hover{background:var(--text);color:#000}
 
-    /* ── Counter bar ── */
+    /* ── Counter ── */
     .counter-bar{
       padding:28px 20px 24px;border-bottom:1px solid var(--line);
       display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;
-      background:linear-gradient(180deg,#0d0d0d 0%,#0a0a0a 100%);
+      background:linear-gradient(180deg,#0d0d0d,#0a0a0a);
     }
-    .counter-side{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase}
+    .counter-side{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;line-height:1.7}
     .counter-side.right{text-align:right}
+    .counter-side .v{color:var(--text);font-weight:700}
     .counter-core{text-align:center}
     .counter-label{font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:10px}
     .counter-big{font-family:var(--mono);font-size:clamp(28px,4.5vw,44px);font-weight:700;letter-spacing:-0.02em;color:var(--accent)}
@@ -65,181 +63,148 @@
     .blink{animation:blink 1.2s infinite}
     @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0.35}}
 
-    /* ── Columns ── */
+    /* ── Main grid ── */
     .columns{
-      display:grid;grid-template-columns:1fr 1.35fr 1.05fr;gap:1px;
-      background:var(--line);min-height:640px;
+      display:grid;grid-template-columns:260px 1fr 300px;gap:1px;
+      background:var(--line);min-height:720px;
     }
     .col{background:var(--bg);padding:20px;overflow:hidden}
-    .col-header{
-      display:flex;justify-content:space-between;align-items:center;
-      padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:16px;
-    }
-    .col-title{
-      font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;color:var(--accent);
-    }
-    .col-badge{
-      font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 8px;
-      border:1px solid var(--line-2);border-radius:4px;
-    }
-    .col-badge .pulse{
-      display:inline-block;width:6px;height:6px;border-radius:50%;
-      background:var(--green);margin-right:5px;vertical-align:middle;
-      animation:pulse 1.8s ease-in-out infinite;
-    }
+    .col-header{display:flex;justify-content:space-between;align-items:center;
+      padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:16px}
+    .col-title{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+    .col-badge{font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 8px;border:1px solid var(--line-2);border-radius:4px}
+    .col-badge .pulse{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:5px;vertical-align:middle;animation:pulse 1.8s ease-in-out infinite}
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.85)}}
 
-    /* ── Miners ── */
-    .miner-list{display:flex;flex-direction:column;gap:10px}
-    .miner-item{
-      padding:12px 14px;border:1px solid var(--line);border-radius:8px;
-      background:var(--panel);transition:border-color .2s;
-    }
-    .miner-item:hover{border-color:var(--line-2)}
-    .miner-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .miner-name{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--text)}
-    .miner-status{
-      font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;
-      color:var(--green);padding:2px 6px;border:1px solid var(--green);border-radius:3px;
-    }
+    /* ── Microscalers ── */
+    .miner-list{display:flex;flex-direction:column;gap:8px}
+    .miner-item{padding:11px 12px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+    .miner-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+    .miner-name{font-family:var(--mono);font-size:12px;font-weight:700}
+    .miner-status{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);padding:2px 5px;border:1px solid var(--green);border-radius:3px}
     .miner-status.idle{color:var(--muted);border-color:var(--muted-2)}
-    .miner-spec{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:6px;letter-spacing:0.02em}
-    .miner-rate{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px}
-    .miner-rate .val{color:var(--text)}
-    .miner-rate .lbl{color:var(--muted-2);letter-spacing:0.08em;text-transform:uppercase}
+    .miner-spec{font-family:var(--mono);font-size:9.5px;color:var(--muted);margin-bottom:6px;letter-spacing:0.02em}
+    .miner-rows{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;font-family:var(--mono);font-size:10px}
+    .miner-rows .lbl{color:var(--muted-2);letter-spacing:0.06em;text-transform:uppercase;font-size:9px}
+    .miner-rows .val{color:var(--text);text-align:right;font-weight:500}
+    .miner-cook{margin-top:8px;padding-top:8px;border-top:1px solid var(--line-2);font-family:var(--mono);font-size:10px;color:var(--muted)}
+    .miner-cook .ing{color:var(--green)}
+    .util-bar{height:2px;background:var(--line-2);margin-top:6px;border-radius:1px;overflow:hidden}
+    .util-fill{height:100%;background:var(--green);transition:width .6s ease, background .3s}
+    .util-fill.hot{background:var(--amber)}
 
-    /* ── Mempool / forge ── */
-    .forge-grid{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
-    }
-    .block{
-      border:1px solid var(--line-2);border-radius:6px;padding:14px 12px;
+    /* ── HIVE (honeycomb mempool) ── */
+    .hive-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;margin-bottom:14px;overflow:hidden}
+    .hive-stat{background:var(--panel);padding:9px 10px}
+    .hive-stat .l{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+    .hive-stat .v{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--text);margin-top:2px;letter-spacing:-0.01em}
+    .hive-stat .v.g{color:var(--green)}
+
+    .hive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    @media (max-width:1400px){.hive-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:1100px){.hive-grid{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:700px){.hive-grid{grid-template-columns:repeat(2,1fr)}}
+
+    .hive-block{
+      border:1px solid var(--line-2);border-radius:8px;padding:12px 12px 10px;
       background:linear-gradient(180deg,#141414,#0c0c0c);
-      position:relative;transition:border-color .3s, transform .3s, opacity .3s;
-      animation:blockIn .6s cubic-bezier(.2,.8,.2,1);
+      position:relative;animation:blockIn .5s cubic-bezier(.2,.8,.2,1);
+      transition:border-color .3s;
     }
-    @keyframes blockIn{
-      from{opacity:0;transform:translateY(10px) scale(0.96)}
-      to{opacity:1;transform:translateY(0) scale(1)}
+    @keyframes blockIn{from{opacity:0;transform:translateY(8px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .hive-block.ready{border-color:var(--green)}
+    .hive-block.ready::after{content:"";position:absolute;inset:-1px;border-radius:8px;box-shadow:0 0 0 1px var(--green),0 0 22px rgba(74,222,128,0.25);pointer-events:none}
+    .hive-block.sealing{animation:seal .8s ease forwards}
+    @keyframes seal{
+      0%{box-shadow:0 0 0 1px var(--green),0 0 22px rgba(74,222,128,0.25)}
+      40%{box-shadow:0 0 0 2px var(--accent),0 0 34px rgba(255,255,255,0.5)}
+      100%{opacity:0.4;transform:scale(0.96)}
     }
-    .block.ready{border-color:var(--green)}
-    .block.ready::after{
-      content:"";position:absolute;inset:-1px;border-radius:6px;
-      box-shadow:0 0 0 1px var(--green), 0 0 18px rgba(74,222,128,0.3);
-      pointer-events:none;
-    }
-    .block-vertical{
-      font-family:var(--mono);font-size:9px;letter-spacing:0.14em;
-      text-transform:uppercase;color:var(--muted);margin-bottom:6px;
-    }
-    .block-pairs{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.02em}
-    .block-sub{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:4px}
-    .block-fee{
-      margin-top:10px;padding-top:10px;border-top:1px solid var(--line-2);
-      display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;
-    }
-    .block-fee .score{color:var(--amber);font-weight:700}
-    .block.ready .block-fee .score{color:var(--green)}
-    .jelly-bar{
-      height:3px;background:var(--line-2);margin-top:8px;border-radius:2px;overflow:hidden;
-    }
-    .jelly-fill{
-      height:100%;background:var(--amber);transition:width 1.2s ease, background .3s;
-    }
-    .block.ready .jelly-fill{background:var(--green)}
+    .hive-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-family:var(--mono);font-size:10px}
+    .hive-vert{color:var(--accent);font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+    .hive-age{color:var(--muted-2)}
+    .hive-cooker{font-family:var(--mono);font-size:9px;color:var(--muted);margin-bottom:8px;letter-spacing:0.04em}
+    .hive-cooker .c{color:var(--green)}
 
-    .tape{
-      margin-top:20px;padding-top:16px;border-top:1px solid var(--line);
+    .honeycomb{display:flex;flex-direction:column;gap:0;align-items:flex-start;padding:2px 0}
+    .hc-row{display:flex;gap:2px;margin-bottom:-6px;height:20px}
+    .hc-row:nth-child(even){margin-left:10px}
+    .hex{
+      width:18px;height:20px;
+      clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+      background:#151515;transition:background .35s ease;
     }
-    .tape-label{
-      font-family:var(--mono);font-size:9px;letter-spacing:0.18em;
-      text-transform:uppercase;color:var(--muted);margin-bottom:10px;
+    .hex.f-rj{background:var(--gold)}
+    .hex.f-h{background:var(--green)}
+    .hex.f-p{background:#3d3d3d}
+    .hex.f-rej{background:var(--red);opacity:0.55}
+    .hex.fresh{animation:hexPop .5s ease}
+    @keyframes hexPop{
+      0%{transform:scale(0.4);opacity:0}
+      50%{transform:scale(1.25);opacity:1;filter:brightness(1.5)}
+      100%{transform:scale(1);opacity:1;filter:none}
     }
-    .tape-row{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:8px 10px;background:var(--panel-2);border:1px solid var(--line);
-      border-radius:4px;margin-bottom:5px;font-family:var(--mono);font-size:11px;
-      animation:tapeIn .5s ease-out;
-    }
-    @keyframes tapeIn{
-      from{opacity:0;transform:translateX(-8px)}
-      to{opacity:1;transform:translateX(0)}
-    }
+
+    .hive-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--line-2);font-family:var(--mono);font-size:10px}
+    .hive-fill{color:var(--muted)}
+    .hive-fill .n{color:var(--text);font-weight:700}
+    .hive-score{color:var(--amber);font-weight:700}
+    .hive-block.ready .hive-score{color:var(--green)}
+    .hive-tally{display:flex;gap:6px;font-family:var(--mono);font-size:9px;margin-top:4px}
+    .hive-tally .t{padding:1px 4px;border-radius:2px;border:1px solid var(--line-2);color:var(--muted)}
+    .hive-tally .t.rj{color:var(--gold);border-color:rgba(245,197,66,0.35)}
+    .hive-tally .t.h{color:var(--green);border-color:rgba(74,222,128,0.35)}
+    .hive-tally .t.p{color:var(--muted)}
+    .hive-tally .t.rej{color:var(--red);border-color:rgba(239,68,68,0.35)}
+
+    .sealed-tape{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+    .tape-label{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .tape-row{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--panel-2);border:1px solid var(--line);border-radius:4px;margin-bottom:4px;font-family:var(--mono);font-size:11px;animation:tapeIn .5s ease-out}
+    @keyframes tapeIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
     .tape-row .hash{color:var(--muted);font-size:10px}
-    .tape-row .vert{color:var(--text)}
     .tape-row .score{color:var(--green);font-weight:700}
 
     /* ── Tribunal ── */
-    .trib-stats{
-      display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-      background:var(--line);border:1px solid var(--line);border-radius:6px;
-      margin-bottom:14px;overflow:hidden;
-    }
-    .trib-stat{
-      background:var(--panel);padding:10px 8px;text-align:center;
-    }
-    .trib-stat .v{font-family:var(--mono);font-size:16px;font-weight:700;line-height:1.1}
-    .trib-stat .l{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+    .trib-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;margin-bottom:14px;overflow:hidden}
+    .trib-stat{background:var(--panel);padding:9px 10px;text-align:center}
+    .trib-stat .v{font-family:var(--mono);font-size:15px;font-weight:700;line-height:1.1}
+    .trib-stat .l{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
     .trib-stat.rj .v{color:var(--gold)}
-    .trib-stat.h  .v{color:var(--green)}
-    .trib-stat.p  .v{color:var(--muted)}
+    .trib-stat.h .v{color:var(--green)}
+    .trib-stat.p .v{color:var(--muted)}
     .trib-stat.rej .v{color:var(--red)}
 
     .trib-list{display:flex;flex-direction:column;gap:6px}
-    .trib-row{
-      padding:10px 12px;border:1px solid var(--line);border-radius:6px;
-      background:var(--panel);position:relative;overflow:hidden;
-      animation:tribIn .55s cubic-bezier(.2,.8,.2,1);
-    }
-    @keyframes tribIn{
-      from{opacity:0;transform:translateY(-8px)}
-      to{opacity:1;transform:translateY(0)}
-    }
+    .trib-row{padding:10px 11px;border:1px solid var(--line);border-radius:6px;background:var(--panel);position:relative;overflow:hidden;animation:tribIn .55s cubic-bezier(.2,.8,.2,1)}
+    @keyframes tribIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
     .trib-row.rj{border-color:rgba(245,197,66,0.45)}
     .trib-row.h{border-color:rgba(74,222,128,0.4)}
     .trib-row.p{border-color:var(--line-2)}
-    .trib-row.rej{border-color:rgba(239,68,68,0.4);opacity:0.82}
-
-    .trib-head{
-      display:flex;justify-content:space-between;align-items:center;
-      font-family:var(--mono);font-size:11px;margin-bottom:8px;
-    }
+    .trib-row.rej{border-color:rgba(239,68,68,0.4);opacity:0.85}
+    .trib-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;margin-bottom:8px}
     .trib-id{color:var(--text);font-weight:700}
-    .trib-vert{color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;font-size:10px}
+    .trib-vert{color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;font-size:10px}
     .trib-score{color:var(--muted);font-size:10px}
 
-    .gate-strip{display:flex;gap:4px;align-items:center;margin-bottom:8px}
-    .gate-dot{
-      width:14px;height:5px;border-radius:1px;background:var(--line-2);
-      transition:background .3s;position:relative;
-    }
+    .gate-strip{display:flex;gap:3px;align-items:center;margin-bottom:8px}
+    .gate-dot{width:12px;height:5px;border-radius:1px;background:var(--line-2);transition:background .3s}
     .gate-dot.pass{background:var(--green)}
     .gate-dot.fail{background:var(--red)}
     .gate-label{font-family:var(--mono);font-size:9px;color:var(--muted-2);margin-left:6px;letter-spacing:0.1em}
 
-    .verdict{
-      display:inline-flex;align-items:center;gap:6px;
-      font-family:var(--mono);font-size:10px;font-weight:700;
-      letter-spacing:0.14em;text-transform:uppercase;
-      padding:4px 9px;border-radius:3px;border:1px solid;
-    }
+    .verdict{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:4px 9px;border-radius:3px;border:1px solid}
     .verdict::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
-    .verdict.rj{color:var(--gold);border-color:var(--gold);background:rgba(245,197,66,0.07)}
+    .verdict.rj{color:var(--gold);border-color:var(--gold);background:rgba(245,197,66,0.08)}
     .verdict.h{color:var(--green);border-color:var(--green);background:rgba(74,222,128,0.06)}
     .verdict.p{color:var(--muted);border-color:var(--muted-2)}
     .verdict.rej{color:var(--red);border-color:var(--red);background:rgba(239,68,68,0.06)}
 
     /* ── Rulings ticker ── */
-    .settlement{
-      padding:14px 20px;border-top:1px solid var(--line);background:var(--bg-2);
-      overflow:hidden;white-space:nowrap;position:relative;
-    }
-    .settlement::before,.settlement::after{
-      content:"";position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;
-    }
-    .settlement::before{left:0;background:linear-gradient(90deg,var(--bg-2),transparent)}
-    .settlement::after{right:0;background:linear-gradient(-90deg,var(--bg-2),transparent)}
-    .tick-track{display:inline-flex;animation:tick 55s linear infinite;gap:44px}
+    .ticker-wrap{padding:14px 20px;border-top:1px solid var(--line);background:var(--bg-2);overflow:hidden;white-space:nowrap;position:relative}
+    .ticker-wrap::before,.ticker-wrap::after{content:"";position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+    .ticker-wrap::before{left:0;background:linear-gradient(90deg,var(--bg-2),transparent)}
+    .ticker-wrap::after{right:0;background:linear-gradient(-90deg,var(--bg-2),transparent)}
+    .tick-track{display:inline-flex;animation:tick 55s linear infinite;gap:40px}
     @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
     .tick-item{font-family:var(--mono);font-size:11px;color:var(--muted);display:inline-flex;gap:10px;align-items:center}
     .tick-item .lbl{color:var(--muted-2);letter-spacing:0.14em;font-size:10px}
@@ -249,38 +214,85 @@
     .tick-item .p{color:var(--muted)}
     .tick-item .rej{color:var(--red)}
 
-    /* ── About strip ── */
+    /* ── Tier Ladder ── */
+    .ladder{padding:64px 20px;max-width:1200px;margin:0 auto;border-top:1px solid var(--line)}
+    .ladder-eyebrow{font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:12px}
+    .ladder h2{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-0.03em;font-weight:700;margin-bottom:14px}
+    .ladder-lede{color:var(--muted);font-size:15px;line-height:1.7;max-width:720px;margin-bottom:36px}
+    .ladder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+    @media (max-width:1000px){.ladder-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:600px){.ladder-grid{grid-template-columns:1fr}}
+    .tier{background:var(--panel);padding:24px 20px;position:relative}
+    .tier::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+    .tier.rj::before{background:var(--gold)}
+    .tier.h::before{background:var(--green)}
+    .tier.p::before{background:var(--muted)}
+    .tier.rej::before{background:var(--red)}
+    .tier-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+    .tier-name{font-size:18px;font-weight:700;letter-spacing:-0.01em}
+    .tier.rj .tier-name{color:var(--gold)}
+    .tier.h .tier-name{color:var(--green)}
+    .tier.p .tier-name{color:var(--text)}
+    .tier.rej .tier-name{color:var(--red)}
+    .tier-share{font-family:var(--mono);font-size:11px;color:var(--muted)}
+    .tier-crit{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.7;padding-bottom:12px;border-bottom:1px solid var(--line-2)}
+    .tier-crit b{color:var(--text);font-weight:700}
+    .tier-desc{color:var(--muted);font-size:12.5px;line-height:1.7;margin-bottom:14px}
+    .tier-use{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}
+    .tier-use-v{font-size:12px;color:var(--text);line-height:1.5}
+
+    /* ── Specimen ── */
+    .specimen{padding:64px 20px;max-width:1100px;margin:0 auto;border-top:1px solid var(--line)}
+    .specimen-eyebrow{font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+    .specimen-eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+    .specimen h2{font-size:clamp(26px,3.5vw,36px);line-height:1.15;letter-spacing:-0.03em;font-weight:700;margin-bottom:8px}
+    .specimen-lede{color:var(--muted);font-size:14px;margin-bottom:28px;max-width:640px}
+    .spec-card{border:1px solid rgba(245,197,66,0.3);border-radius:10px;background:linear-gradient(180deg,#141008,#0c0c0c);padding:28px;position:relative;overflow:hidden}
+    .spec-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.6}
+    .spec-meta{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--line-2)}
+    .spec-verdict{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);padding:5px 10px;border:1px solid var(--gold);border-radius:3px;background:rgba(245,197,66,0.07)}
+    .spec-field{font-family:var(--mono);font-size:11px;color:var(--muted)}
+    .spec-field b{color:var(--text);font-weight:700}
+    .spec-q-label,.spec-a-label{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+    .spec-q{color:var(--text);font-size:14.5px;line-height:1.7;margin-bottom:20px;padding:14px 16px;border-left:2px solid var(--line-2);background:rgba(255,255,255,0.015);border-radius:0 4px 4px 0}
+    .spec-a{color:var(--text);font-size:14.5px;line-height:1.75;margin-bottom:22px;padding:16px 18px;border-left:2px solid var(--gold);background:rgba(245,197,66,0.03);border-radius:0 4px 4px 0}
+    .spec-gates{display:flex;gap:4px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+    .spec-gates .gl{font-family:var(--mono);font-size:10px;color:var(--muted);margin-right:8px;letter-spacing:0.1em}
+    .spec-gate{font-family:var(--mono);font-size:10px;padding:3px 7px;border-radius:3px;border:1px solid var(--green);color:var(--green);letter-spacing:0.05em}
+    .spec-prov{font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.9;padding-top:14px;border-top:1px solid var(--line-2)}
+    .spec-prov .k{color:var(--muted-2);letter-spacing:0.08em;text-transform:uppercase;margin-right:6px}
+    .spec-prov .v{color:var(--text)}
+    .spec-nav{display:flex;gap:6px;margin-top:20px;justify-content:flex-end}
+    .spec-dot{width:7px;height:7px;border-radius:50%;background:var(--muted-2);cursor:pointer;transition:background .2s,transform .2s}
+    .spec-dot:hover{background:var(--muted)}
+    .spec-dot.active{background:var(--gold);transform:scale(1.3)}
+
+    /* ── About ── */
     .about{padding:60px 20px;max-width:980px;margin:0 auto;border-top:1px solid var(--line)}
     .about-eyebrow{font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:14px}
-    .about h2{font-size:clamp(28px,4vw,44px);line-height:1.1;letter-spacing:-0.03em;font-weight:700;margin-bottom:20px}
-    .about p{color:var(--muted);font-size:15px;line-height:1.8;max-width:720px}
-    .about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:40px;border:1px solid var(--line)}
-    .about-card{background:var(--panel);padding:24px}
-    .about-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.12em;margin-bottom:12px}
+    .about h2{font-size:clamp(26px,3.5vw,38px);line-height:1.15;letter-spacing:-0.03em;font-weight:700;margin-bottom:18px}
+    .about p{color:var(--muted);font-size:14.5px;line-height:1.8;max-width:720px}
+    .about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:36px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+    @media (max-width:900px){.about-grid{grid-template-columns:1fr}}
+    .about-card{background:var(--panel);padding:22px}
+    .about-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.12em;margin-bottom:10px}
     .about-role{font-size:15px;font-weight:700;margin-bottom:6px}
     .about-desc{color:var(--muted);font-size:12.5px;line-height:1.7}
 
     /* ── Footer ── */
-    .footer{
-      padding:28px 20px;border-top:1px solid var(--line);
-      display:flex;justify-content:space-between;align-items:center;gap:20px;
-      color:var(--muted);font-family:var(--mono);font-size:11px;
-    }
+    .footer{padding:28px 20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:20px;color:var(--muted);font-family:var(--mono);font-size:11px;flex-wrap:wrap}
     .footer a{color:var(--muted)}
     .footer a:hover{color:var(--text)}
 
-    /* ── Responsive ── */
     @media (max-width:1100px){
       .columns{grid-template-columns:1fr}
       .col{border-bottom:1px solid var(--line)}
-      .forge-grid{grid-template-columns:repeat(2,1fr)}
       .counter-bar{grid-template-columns:1fr}
       .counter-side,.counter-side.right{text-align:center}
-      .about-grid{grid-template-columns:1fr}
     }
     @media (max-width:600px){
-      .forge-grid{grid-template-columns:1fr}
       .topnav a:not(.cta){display:none}
+      .spec-card{padding:20px 16px}
     }
   </style>
 </head>
@@ -296,7 +308,9 @@
   <nav class="topnav">
     <a href="https://swarmandbee.ai/">SwarmCore</a>
     <a href="https://swarmandbee.ai/cre/">CRE</a>
-    <a href="#how">How it works</a>
+    <a href="#ladder">Tiers</a>
+    <a href="#specimen">Specimen</a>
+    <a href="#how">How</a>
     <a href="https://swarmandbee.ai/#contact" class="cta">Bring compute →</a>
   </nav>
 </header>
@@ -305,7 +319,8 @@
 <section class="counter-bar">
   <div class="counter-side">
     <span class="blink">●</span> LIVE · Hedera anchored<br>
-    <span id="tip-height">block 0</span> · <span id="tip-hash">—</span>
+    <span class="v" id="tip-height">block 0</span> · <span id="tip-hash">—</span><br>
+    Fleet <span class="v" id="fleet-tflops">0.0</span> TFLOPS · <span class="v" id="fleet-gpuh">0</span> GPU-h today
   </div>
   <div class="counter-core">
     <div class="counter-label">Virgin agents forged</div>
@@ -313,37 +328,39 @@
     <div class="counter-meta"><span id="fpct">0.0000%</span> of supply · RJP-1 attested · tribunal sealed · Hedera anchored</div>
   </div>
   <div class="counter-side right">
-    ESTIMATED NEXT BLOCK<br>
-    <span id="next-eta">~3h 00m</span>
+    NEXT MERKLE ANCHOR<br>
+    <span class="v" id="next-eta">~3h 00m</span><br>
+    Burn rate <span class="v" id="burn-rate">0</span> pairs/min
   </div>
 </section>
 
-<!-- Columns -->
+<!-- Main columns -->
 <main class="columns">
 
   <!-- Microscalers -->
   <section class="col">
     <div class="col-header">
       <div class="col-title">Microscalers</div>
-      <div class="col-badge"><span class="pulse"></span>fleet live</div>
+      <div class="col-badge"><span class="pulse"></span><span id="miner-online">7/7</span></div>
     </div>
     <div class="miner-list" id="miner-list"></div>
   </section>
 
-  <!-- Mempool-Hive -->
+  <!-- HIVE -->
   <section class="col">
     <div class="col-header">
       <div class="col-title">Mempool · Hive</div>
-      <div class="col-badge"><span id="mempool-count">0</span> batches cooking</div>
+      <div class="col-badge"><span id="hive-cooking">0</span> cooking</div>
     </div>
-    <div class="forge-grid" id="forge-grid"></div>
-    <div class="tape">
-      <div class="tape-label">Sealed batches · Merkle-stamped · Hedera</div>
+    <div class="hive-meta" id="hive-meta"></div>
+    <div class="hive-grid" id="hive-grid"></div>
+    <div class="sealed-tape">
+      <div class="tape-label">Sealed batches → Hedera</div>
       <div id="tape-list"></div>
     </div>
   </section>
 
-  <!-- Tribunal / Arena -->
+  <!-- Tribunal -->
   <section class="col">
     <div class="col-header">
       <div class="col-title">Tribunal · Arena</div>
@@ -356,8 +373,82 @@
 </main>
 
 <!-- Rulings ticker -->
-<section class="settlement">
+<section class="ticker-wrap">
   <div class="tick-track" id="tick-track"></div>
+</section>
+
+<!-- Tier Ladder -->
+<section class="ladder" id="ladder">
+  <div class="ladder-eyebrow">The Tier Ladder</div>
+  <h2>Four verdicts. No gray area.</h2>
+  <p class="ladder-lede">
+    Every pair that leaves the mempool faces the 6+1 gates: <b style="color:var(--text)">schema · dedup · leak · factual · coherence · signal · jelly</b>. The verdict stamps the tier. The tier sets the use. The receipt is public, the lineage is cryptographic, the ruling is final.
+  </p>
+  <div class="ladder-grid">
+    <div class="tier rj">
+      <div class="tier-head"><div class="tier-name">Royal Jelly</div><div class="tier-share">≈ 22%</div></div>
+      <div class="tier-crit">
+        <b>JellyScore ≥ 0.90</b><br>
+        7/7 gates pass · novelty ≥ 0.85<br>
+        cross-verified · no eval leak
+      </div>
+      <div class="tier-desc">
+        The rarest output. Pairs that teach something new, defensible against scrutiny, not present in any public eval set. These train the top-tier models — the ones that feed the queen.
+      </div>
+      <div class="tier-use">Used for</div>
+      <div class="tier-use-v">Flagship model training · premium dataset licensing · benchmark authoring</div>
+    </div>
+    <div class="tier h">
+      <div class="tier-head"><div class="tier-name">Honey</div><div class="tier-share">≈ 42%</div></div>
+      <div class="tier-crit">
+        <b>JellyScore 0.78–0.89</b><br>
+        7/7 gates pass · factually clean<br>
+        production-grade
+      </div>
+      <div class="tier-desc">
+        The workhorse. Bankable pairs — correct, useful, well-formed. Not novel enough for the queen but the backbone of every shipping model. This is what you sell.
+      </div>
+      <div class="tier-use">Used for</div>
+      <div class="tier-use-v">Production SFT · domain-vertical packs · customer deployments</div>
+    </div>
+    <div class="tier p">
+      <div class="tier-head"><div class="tier-name">Propolis</div><div class="tier-share">≈ 23%</div></div>
+      <div class="tier-crit">
+        <b>JellyScore 0.65–0.77</b><br>
+        6/7 gates pass · minor defects<br>
+        structurally sound
+      </div>
+      <div class="tier-desc">
+        The sealant. Useful scaffolding — preamble, negative examples, format templates, structural glue. Doesn't feed the queen but keeps the hive watertight. Discounted, not discarded.
+      </div>
+      <div class="tier-use">Used for</div>
+      <div class="tier-use-v">Negative examples · warm-up data · format conditioning · RLHF rollouts</div>
+    </div>
+    <div class="tier rej">
+      <div class="tier-head"><div class="tier-name">Eliminated</div><div class="tier-share">≈ 13%</div></div>
+      <div class="tier-crit">
+        <b>JellyScore &lt; 0.65</b><br>
+        ≤ 5/7 gates pass<br>
+        contaminated · duplicated · leaked
+      </div>
+      <div class="tier-desc">
+        Dead on arrival. Hallucinations, think-tag leakage, trivial dupes, eval contamination. Logged with reason codes — the pipeline learns from its misses — but never sold, never trained, never shipped.
+      </div>
+      <div class="tier-use">Used for</div>
+      <div class="tier-use-v">Cook auditor feedback · contamination forensics · generator tuning</div>
+    </div>
+  </div>
+</section>
+
+<!-- Specimen -->
+<section class="specimen" id="specimen">
+  <div class="specimen-eyebrow">Royal Jelly specimen</div>
+  <h2>What a Royal pair actually looks like.</h2>
+  <p class="specimen-lede">
+    The top 22 percent. Pulled live from the ledger. Rotating — each one passed all seven gates, cleared the novelty threshold, and got Merkle-stamped to Hedera within the last anchoring window.
+  </p>
+  <div id="spec-card" class="spec-card"></div>
+  <div class="spec-nav" id="spec-nav"></div>
 </section>
 
 <!-- About -->
@@ -365,32 +456,30 @@
   <div class="about-eyebrow">How it works</div>
   <h2>Compute in. Classified intelligence out.</h2>
   <p>
-    Microscalers bring attested GPU-hours. The mempool-hive cooks pairs into batches. The tribunal rules on every pair through six gates plus a JellyScore floor — Merkle-stamped every three hours, kill switch at one percent contamination, anchored to Hedera. What survives the arena gets a tier stamp: <span style="color:var(--gold)">Royal Jelly</span>, <span style="color:var(--green)">Honey</span>, <span style="color:var(--muted)">Propolis</span> — or it is eliminated. Twenty-one million virgin agents, cap enforced by compute, not code. Every mint born with a receipt that survives scrutiny. Swarm &amp; Bee handles the market off-site.
+    Microscalers bring attested GPU-hours. The mempool-hive cooks pairs into batches. The tribunal rules on every pair through the six gates plus a JellyScore floor — Merkle-stamped every three hours, kill switch at one percent contamination, anchored to Hedera. What survives the arena gets a tier stamp: Royal Jelly, Honey, Propolis — or it's eliminated. Twenty-one million virgin agents, cap enforced by compute, not code. Swarm &amp; Bee handles the market off-site.
   </p>
   <div class="about-grid">
     <div class="about-card">
       <div class="about-num">01 · SUPPLY</div>
       <div class="about-role">Microscalers</div>
-      <div class="about-desc">Bring attested GPU-hours. Compute is metered, sealed, and fingerprinted. No phantom hash rate — every work unit signed at the silicon.</div>
+      <div class="about-desc">Bring attested GPU-hours. Compute is metered, sealed, fingerprinted at the silicon. Paid per verified work unit — no phantom hash rate.</div>
     </div>
     <div class="about-card">
       <div class="about-num">02 · REFINERY</div>
       <div class="about-role">SwarmEnergy</div>
-      <div class="about-desc">The tribunal. Royal Jelly Protocol runs the 6+1 gates on every pair. Verdicts are final, lineage is public, the cook auditor watches the watchers.</div>
+      <div class="about-desc">The tribunal. Royal Jelly Protocol runs the 6+1 gates on every pair. Verdicts final, lineage public, cook auditor watches the watchers.</div>
     </div>
     <div class="about-card">
       <div class="about-num">03 · MARKET</div>
       <div class="about-role">Swarm &amp; Bee</div>
-      <div class="about-desc">The exchange, off-site. Lists what the tribunal stamps, matches buyers, settles in USDC. A licensed brokerage — not a speculative token venue.</div>
+      <div class="about-desc">The exchange, off-site. Lists what the tribunal stamps, matches buyers, settles in USDC. Licensed brokerage — not a token venue.</div>
     </div>
   </div>
 </section>
 
 <!-- Footer -->
 <footer class="footer">
-  <div>
-    © 2026 Caballerz Network LLC DBA Swarm &amp; Bee · D-U-N-S 138652395 · Florida
-  </div>
+  <div>© 2026 Caballerz Network LLC DBA Swarm &amp; Bee · D-U-N-S 138652395 · Florida</div>
   <div style="display:flex;gap:16px">
     <a href="https://swarmandbee.ai/privacy/">Privacy</a>
     <a href="https://swarmandbee.ai/terms/">Terms</a>
@@ -400,134 +489,261 @@
 
 <script>
 (function(){
-  // ── STATE ──────────────────────────────────────────
-  const state = {
-    forged: 847392,
-    blockHeight: 40352,
-    miners: [
-      { name:"swarmrails-01",    spec:"RTX PRO 6000 · 96GB · Blackwell", rate:"1,284 pairs/hr", util:97, status:"active" },
-      { name:"swarmrails-02",    spec:"RTX PRO 4500 · 32GB · Blackwell", rate:"812 pairs/hr",   util:88, status:"active" },
-      { name:"whale",            spec:"RTX 3090 · 24GB · Ampere",        rate:"318 pairs/hr",   util:72, status:"active" },
-      { name:"fc-austin-07",     spec:"H100 · 80GB · Hopper · SMC 41",   rate:"1,647 pairs/hr", util:94, status:"active" },
-      { name:"fc-phx-02",        spec:"RTX 4090 · 24GB · Ada · SMC 18",  rate:"452 pairs/hr",   util:81, status:"active" },
-      { name:"fc-miami-15",      spec:"RTX 6000 Ada · 48GB · SMC 06",    rate:"— idle —",       util:0,  status:"idle" },
-      { name:"signal-edge-01",   spec:"Jetson Orin · 64GB · edge node",  rate:"58 pairs/hr",    util:58, status:"active" }
-    ],
-    verticals: ["CRE","MEDICAL","PHARMA","AVIATION","GRANT","CREDIT"],
-    pairSeq: 848210,
-    batchSeq: 4821,
-    tribunalStats: { rj: 142, h: 318, p: 86, rej: 39 }
-  };
-
   // ── HELPERS ────────────────────────────────────────
-  const fmt = n => n.toLocaleString("en-US");
+  const fmt = n => Math.round(n).toLocaleString("en-US");
   const pad = (n,w) => String(n).padStart(w,"0");
   const pick = a => a[Math.floor(Math.random()*a.length)];
   const rnd = (lo,hi) => Math.floor(lo + Math.random()*(hi-lo));
   const rndf = (lo,hi,d=2) => +(lo + Math.random()*(hi-lo)).toFixed(d);
   const hash = (n=12) => Array.from({length:n},()=>"0123456789abcdef"[rnd(0,16)]).join("");
+  const el = id => document.getElementById(id);
 
-  // ── MINERS ─────────────────────────────────────────
+  // ── STATE ──────────────────────────────────────────
+  const VERTICALS = ["CRE","MEDICAL","PHARMA","AVIATION","GRANT","CREDIT"];
+  const MINER_NAMES = ["swarmrails-01","fc-austin-07","swarmrails-02","fc-phx-02","whale","fc-miami-15","signal-edge-01"];
+
+  const state = {
+    forged: 847392,
+    blockHeight: 40352,
+    batchSeq: 4821,
+    pairSeq: 848210,
+    miners: [
+      { name:"swarmrails-01",  spec:"RTX PRO 6000 · 96GB · Blackwell", tflops:24.0, cookRate:1284, util:97, status:"active", temp:71 },
+      { name:"swarmrails-02",  spec:"RTX PRO 4500 · 32GB · Blackwell", tflops:12.8, cookRate:812,  util:88, status:"active", temp:68 },
+      { name:"fc-austin-07",   spec:"H100 · 80GB · Hopper · SMC 41",   tflops:67.0, cookRate:1647, util:94, status:"active", temp:74 },
+      { name:"fc-phx-02",      spec:"RTX 4090 · 24GB · Ada · SMC 18",  tflops:8.2,  cookRate:452,  util:81, status:"active", temp:70 },
+      { name:"whale",          spec:"RTX 3090 · 24GB · Ampere",        tflops:6.4,  cookRate:318,  util:72, status:"active", temp:65 },
+      { name:"fc-miami-15",    spec:"RTX 6000 Ada · 48GB · SMC 06",    tflops:10.4, cookRate:0,    util:0,  status:"idle",   temp:38 },
+      { name:"signal-edge-01", spec:"Jetson Orin · 64GB · edge",       tflops:0.3,  cookRate:58,   util:58, status:"active", temp:52 },
+    ],
+    hiveMeta: { cooking:6, ready:0, todayBatches:214, todaySealed:198 },
+    tribunalStats: { rj: 142, h: 318, p: 86, rej: 39 },
+    todayGpuH: 1842
+  };
+
+  // ── MICROSCALERS ───────────────────────────────────
   function renderMiners(){
-    const el = document.getElementById("miner-list");
-    el.innerHTML = state.miners.map(m => `
+    el("miner-list").innerHTML = state.miners.map(m => `
       <div class="miner-item">
         <div class="miner-head">
           <div class="miner-name">${m.name}</div>
           <div class="miner-status ${m.status==="idle"?"idle":""}">${m.status}</div>
         </div>
         <div class="miner-spec">${m.spec}</div>
-        <div class="miner-rate">
-          <span class="lbl">cook rate</span>
-          <span class="val">${m.rate}</span>
+        <div class="miner-rows">
+          <span class="lbl">tflops</span><span class="val">${m.tflops.toFixed(1)}</span>
+          <span class="lbl">cook</span><span class="val">${m.cookRate>0?fmt(m.cookRate)+" p/h":"—"}</span>
+          <span class="lbl">util</span><span class="val">${m.util}%</span>
+          <span class="lbl">temp</span><span class="val">${m.temp}°C</span>
         </div>
-        <div class="miner-rate">
-          <span class="lbl">util</span>
-          <span class="val">${m.util}%</span>
-        </div>
+        <div class="util-bar"><div class="util-fill ${m.temp>72?"hot":""}" style="width:${m.util}%"></div></div>
+        ${m.status==="active" ? `<div class="miner-cook">cooking <span class="ing">pair #${fmt(state.pairSeq - rnd(1,80))}</span></div>` : ""}
       </div>
     `).join("");
+    const online = state.miners.filter(m=>m.status==="active").length;
+    el("miner-online").textContent = `${online}/${state.miners.length}`;
   }
 
-  setInterval(() => {
+  function tickMiners(){
     state.miners.forEach(m => {
-      m.util = Math.max(0, Math.min(99, m.util + rnd(-4,5)));
-      if(m.util < 10) m.status = "idle";
-      else m.status = "active";
+      m.util = Math.max(0, Math.min(99, m.util + rnd(-5,6)));
+      m.temp = Math.max(35, Math.min(82, m.temp + rnd(-2,3)));
+      if (m.util < 10) { m.status = "idle"; m.cookRate = 0; }
+      else { m.status = "active"; m.cookRate = Math.max(30, Math.round(m.tflops * m.util * 0.82)); }
     });
     renderMiners();
-  }, 4000);
+    updateFleet();
+  }
 
-  // ── MEMPOOL-HIVE ───────────────────────────────────
-  function makeBlock(){
-    const vert = pick(state.verticals);
-    const pairs = rnd(180, 1800);
-    const score = rndf(0.62, 0.94);
+  function updateFleet(){
+    const active = state.miners.filter(m=>m.status==="active");
+    const tflops = active.reduce((a,m)=>a + m.tflops*(m.util/100), 0);
+    const cookPerMin = active.reduce((a,m)=>a + m.cookRate/60, 0);
+    el("fleet-tflops").textContent = tflops.toFixed(1);
+    el("burn-rate").textContent = fmt(cookPerMin);
+    el("fleet-gpuh").textContent = fmt(state.todayGpuH);
+  }
+
+  // ── HIVE (honeycomb blocks) ────────────────────────
+  const HC_ROWS = 6;
+  const HC_COLS = 7; // even rows 7, odd rows 6 (offset) → 39 cells per block
+  const CELLS_PER_BLOCK = HC_ROWS * HC_COLS - Math.floor(HC_ROWS/2); // 39
+
+  function blockCapacity(){ return CELLS_PER_BLOCK; }
+
+  function newBlock(){
     return {
       id: Date.now() + Math.random(),
-      vert, pairs, score,
-      progress: score,
-      ready: score >= 0.85
+      vert: pick(VERTICALS),
+      cooker: pick(state.miners.filter(m=>m.status==="active")).name || "swarmrails-01",
+      cells: Array(CELLS_PER_BLOCK).fill(null), // null=empty, else tier
+      filled: 0,
+      score: rndf(0.58, 0.78, 3),
+      ageStart: Date.now(),
+      ready: false,
+      sealing: false
     };
   }
 
-  let blocks = Array.from({length:6}, makeBlock);
+  let hive = Array.from({length:6}, newBlock);
 
-  function renderBlocks(){
-    const el = document.getElementById("forge-grid");
-    el.innerHTML = blocks.map(b => `
-      <div class="block ${b.ready?"ready":""}">
-        <div class="block-vertical">${b.vert} · cooking</div>
-        <div class="block-pairs">${fmt(b.pairs)}</div>
-        <div class="block-sub">pairs · ${(b.pairs*1.2).toFixed(0)} GPU-min burned</div>
-        <div class="jelly-bar"><div class="jelly-fill" style="width:${(b.progress*100).toFixed(0)}%"></div></div>
-        <div class="block-fee">
-          <span style="color:var(--muted)">JellyScore</span>
-          <span class="score">${b.score.toFixed(3)}</span>
-        </div>
-      </div>
-    `).join("");
-    document.getElementById("mempool-count").textContent = blocks.length;
+  function pickTier(){
+    const r = Math.random();
+    if (r < 0.22) return "rj";
+    if (r < 0.64) return "h";
+    if (r < 0.87) return "p";
+    return "rej";
   }
 
-  setInterval(() => {
-    blocks.forEach(b => {
-      if (!b.ready) {
-        b.progress = Math.min(1, b.progress + rndf(0.002, 0.018, 4));
-        b.score = Math.min(0.98, b.score + rndf(0.001, 0.012, 4));
-        if (b.score >= 0.85) b.ready = true;
+  function renderHive(){
+    el("hive-grid").innerHTML = hive.map((b,bi) => {
+      const rows = [];
+      for (let r=0; r<HC_ROWS; r++){
+        const cols = r%2===0 ? HC_COLS : HC_COLS-1;
+        const rowCells = [];
+        for (let c=0; c<cols; c++){
+          const idx = rowToIndex(r,c);
+          const tier = b.cells[idx];
+          const cls = tier ? `f-${tier}` : "";
+          rowCells.push(`<div class="hex ${cls}" data-bi="${bi}" data-idx="${idx}"></div>`);
+        }
+        rows.push(`<div class="hc-row">${rowCells.join("")}</div>`);
       }
-    });
-
-    const readyIdx = blocks.findIndex(b => b.ready);
-    if (readyIdx >= 0 && Math.random() < 0.35) {
-      const sealed = blocks[readyIdx];
-      blocks.splice(readyIdx, 1);
-      blocks.push(makeBlock());
-      sealToTape(sealed);
-    }
-    renderBlocks();
-  }, 1800);
-
-  // ── TAPE (sealed batches → Hedera) ─────────────────
-  const tape = [];
-  function sealToTape(b){
-    const h = hash();
-    const batchId = ++state.batchSeq;
-    tape.unshift({ vert:b.vert, score:b.score, hash:h, pairs:b.pairs, batch:batchId });
-    if (tape.length > 6) tape.pop();
-    state.forged += rnd(2, 18);
-    state.blockHeight += 1;
-    renderTape();
-    renderCounter();
-    // Sealed batches feed the tribunal
-    feedTribunal(b.vert, b.pairs, batchId);
+      const tally = countTiers(b);
+      const age = Math.floor((Date.now() - b.ageStart)/1000);
+      const ageStr = `${Math.floor(age/60)}:${pad(age%60,2)}`;
+      const pctFull = Math.round(b.filled/CELLS_PER_BLOCK*100);
+      return `
+        <div class="hive-block ${b.ready?"ready":""} ${b.sealing?"sealing":""}">
+          <div class="hive-head">
+            <span class="hive-vert">${b.vert}</span>
+            <span class="hive-age">${ageStr}</span>
+          </div>
+          <div class="hive-cooker">cooker: <span class="c">${b.cooker}</span></div>
+          <div class="honeycomb">${rows.join("")}</div>
+          <div class="hive-foot">
+            <span class="hive-fill"><span class="n">${b.filled}</span>/${CELLS_PER_BLOCK} <span style="color:var(--muted-2)">(${pctFull}%)</span></span>
+            <span class="hive-score">Jelly ${b.score.toFixed(3)}</span>
+          </div>
+          <div class="hive-tally">
+            <span class="t rj">RJ ${tally.rj}</span>
+            <span class="t h">H ${tally.h}</span>
+            <span class="t p">P ${tally.p}</span>
+            <span class="t rej">✕ ${tally.rej}</span>
+          </div>
+        </div>
+      `;
+    }).join("");
   }
+
+  function rowToIndex(r,c){
+    let idx = 0;
+    for (let rr=0; rr<r; rr++) idx += (rr%2===0 ? HC_COLS : HC_COLS-1);
+    return idx + c;
+  }
+
+  function countTiers(b){
+    const t = {rj:0,h:0,p:0,rej:0};
+    for (const v of b.cells) if (v) t[v]++;
+    return t;
+  }
+
+  // Fill a random empty cell in a block, return tier or null if full
+  function fillOneCell(b){
+    const empty = [];
+    for (let i=0; i<b.cells.length; i++) if (!b.cells[i]) empty.push(i);
+    if (empty.length === 0) return null;
+    const idx = empty[rnd(0, empty.length)];
+    const tier = pickTier();
+    b.cells[idx] = tier;
+    b.filled++;
+    return tier;
+  }
+
+  function renderHiveMeta(){
+    const cooking = hive.filter(b => !b.sealing).length;
+    state.hiveMeta.cooking = cooking;
+    state.hiveMeta.ready = hive.filter(b => b.ready && !b.sealing).length;
+    el("hive-cooking").textContent = cooking;
+    el("hive-meta").innerHTML = `
+      <div class="hive-stat"><div class="l">cooking</div><div class="v">${cooking}</div></div>
+      <div class="hive-stat"><div class="l">ready to seal</div><div class="v g">${state.hiveMeta.ready}</div></div>
+      <div class="hive-stat"><div class="l">batches today</div><div class="v">${fmt(state.hiveMeta.todayBatches)}</div></div>
+      <div class="hive-stat"><div class="l">sealed today</div><div class="v">${fmt(state.hiveMeta.todaySealed)}</div></div>
+    `;
+  }
+
+  function tickHive(){
+    // Fill cells across blocks based on fleet cook rate
+    const active = state.miners.filter(m=>m.status==="active");
+    const cellsThisTick = Math.max(1, Math.round(active.length * rnd(1,3) * 0.6));
+
+    for (let k=0; k<cellsThisTick; k++){
+      // Pick a random non-sealing, non-full block
+      const candidates = hive.filter(b => !b.sealing && b.filled < CELLS_PER_BLOCK);
+      if (!candidates.length) break;
+      const b = pick(candidates);
+      const tier = fillOneCell(b);
+      // Nudge score upward as more cells fill (cook auditor learning)
+      if (b.filled > 5) b.score = Math.min(0.97, b.score + rndf(0.0005, 0.008, 4));
+      if (b.score >= 0.85 && b.filled >= Math.floor(CELLS_PER_BLOCK*0.55)) b.ready = true;
+      // If the filled cell was RJ or H, bump score a hair more
+      if (tier === "rj") b.score = Math.min(0.97, b.score + rndf(0.002, 0.008, 4));
+
+      // Seal when full OR (ready AND 85%+ full AND random chance)
+      if (b.filled >= CELLS_PER_BLOCK || (b.ready && b.filled >= Math.floor(CELLS_PER_BLOCK*0.85) && Math.random() < 0.08)){
+        sealBlock(b);
+      }
+    }
+
+    renderHive();
+    renderHiveMeta();
+  }
+
+  function sealBlock(b){
+    b.sealing = true;
+    renderHive();
+    setTimeout(() => {
+      // Replace this block with a fresh one
+      const idx = hive.findIndex(x => x === b);
+      if (idx >= 0){
+        hive.splice(idx, 1);
+        hive.push(newBlock());
+      }
+      // Tape entry
+      const tally = countTiers(b);
+      const batchId = ++state.batchSeq;
+      const h = hash();
+      tape.unshift({ batch:batchId, vert:b.vert, score:b.score, hash:h, tally, pairs:b.filled*rnd(28,52) });
+      if (tape.length > 6) tape.pop();
+      state.forged += b.filled * rnd(22,48);
+      state.blockHeight += 1;
+      state.hiveMeta.todaySealed += 1;
+      state.hiveMeta.todayBatches += 1;
+      renderTape();
+      renderCounter();
+      // Feed the rulings ticker
+      const pairs = tape[0].pairs;
+      rulings.unshift({
+        batch: batchId,
+        vert: b.vert,
+        rj: Math.round(pairs*0.22),
+        h:  Math.round(pairs*0.42),
+        p:  Math.round(pairs*0.23),
+        rej:Math.round(pairs*0.13),
+        hash: h
+      });
+      if (rulings.length > 40) rulings.pop();
+      renderHiveMeta();
+    }, 800);
+  }
+
+  // ── TAPE ───────────────────────────────────────────
+  const tape = [];
   function renderTape(){
-    const el = document.getElementById("tape-list");
-    el.innerHTML = tape.map(t => `
+    el("tape-list").innerHTML = tape.map(t => `
       <div class="tape-row">
-        <span class="vert">#${fmt(t.batch)} · ${t.vert}</span>
+        <span>#${fmt(t.batch)} · <span style="color:var(--text)">${t.vert}</span> · ${fmt(t.pairs)} pairs</span>
         <span class="hash">0x${t.hash}</span>
         <span class="score">${t.score.toFixed(3)}</span>
       </div>
@@ -536,10 +752,10 @@
 
   // ── COUNTER ────────────────────────────────────────
   function renderCounter(){
-    document.getElementById("forged").textContent = fmt(state.forged);
-    document.getElementById("fpct").textContent = (state.forged/21000000*100).toFixed(4) + "%";
-    document.getElementById("tip-height").textContent = "block " + fmt(state.blockHeight);
-    document.getElementById("tip-hash").textContent = "0x" + hash();
+    el("forged").textContent = fmt(state.forged);
+    el("fpct").textContent = (state.forged/21000000*100).toFixed(4) + "%";
+    el("tip-height").textContent = "block " + fmt(state.blockHeight);
+    el("tip-hash").textContent = "0x" + hash();
   }
 
   let etaSec = 3*3600;
@@ -549,59 +765,39 @@
     const h = Math.floor(etaSec/3600);
     const m = Math.floor((etaSec%3600)/60);
     const s = etaSec%60;
-    document.getElementById("next-eta").textContent =
-      `~${h}h ${pad(m,2)}m ${pad(s,2)}s`;
+    el("next-eta").textContent = `~${h}h ${pad(m,2)}m ${pad(s,2)}s`;
+    state.todayGpuH += 0.02;
+    if (Math.random() < 0.1) updateFleet();
   }, 1000);
 
-  // ── TRIBUNAL / ARENA ───────────────────────────────
+  // ── TRIBUNAL ───────────────────────────────────────
   const GATE_NAMES = ["schema","dedup","leak","factual","coherence","signal","jelly"];
   const VERDICT_LABEL = { rj:"Royal Jelly", h:"Honey", p:"Propolis", rej:"Eliminated" };
   const docket = [];
-  let pendingFromBatches = [];
 
   function makeJudgement(vert){
     const bias = Math.random();
     let gateFails, cls;
-    if (bias < 0.22)      { gateFails = 0; cls = "rj"; }       // 22% Royal Jelly
-    else if (bias < 0.64) { gateFails = 0; cls = "h";  }       // 42% Honey
-    else if (bias < 0.87) { gateFails = 1; cls = "p";  }       // 23% Propolis
-    else                  { gateFails = rnd(2,4); cls = "rej"; } // 13% eliminated
-
+    if (bias < 0.22)      { gateFails = 0; cls = "rj"; }
+    else if (bias < 0.64) { gateFails = 0; cls = "h";  }
+    else if (bias < 0.87) { gateFails = 1; cls = "p";  }
+    else                  { gateFails = rnd(2,4); cls = "rej"; }
     const gates = Array(7).fill("pass");
     let placed = 0;
-    while (placed < gateFails) {
+    while (placed < gateFails){
       const idx = rnd(0,7);
       if (gates[idx] === "pass") { gates[idx] = "fail"; placed++; }
     }
-
     const score = cls==="rj" ? rndf(0.90,0.96,3)
                 : cls==="h"  ? rndf(0.78,0.89,3)
                 : cls==="p"  ? rndf(0.65,0.77,3)
                              : rndf(0.42,0.64,3);
-
-    return {
-      id: state.pairSeq++,
-      vert: vert || pick(state.verticals),
-      gates, cls, score
-    };
-  }
-
-  function feedTribunal(vert, pairs, batchId){
-    // Queue a handful of representative judgements from this batch
-    const sample = Math.min(4, Math.max(1, Math.round(pairs/400)));
-    for (let i=0; i<sample; i++) pendingFromBatches.push(vert);
-    // Emit a rulings-tape entry for this batch as a whole
-    const rj  = Math.round(pairs*0.22);
-    const h   = Math.round(pairs*0.42);
-    const p   = Math.round(pairs*0.23);
-    const rej = pairs - rj - h - p;
-    rulings.unshift({ batch:batchId, vert, rj, h, p, rej, hash:hash() });
-    if (rulings.length > 36) rulings.pop();
+    return { id: state.pairSeq++, vert: vert || pick(VERTICALS), gates, cls, score };
   }
 
   function renderTribStats(){
     const s = state.tribunalStats;
-    document.getElementById("trib-stats").innerHTML = `
+    el("trib-stats").innerHTML = `
       <div class="trib-stat rj"><div class="v">${fmt(s.rj)}</div><div class="l">Royal Jelly</div></div>
       <div class="trib-stat h"><div class="v">${fmt(s.h)}</div><div class="l">Honey</div></div>
       <div class="trib-stat p"><div class="v">${fmt(s.p)}</div><div class="l">Propolis</div></div>
@@ -610,8 +806,7 @@
   }
 
   function renderDocket(){
-    const el = document.getElementById("trib-list");
-    el.innerHTML = docket.map(j => `
+    el("trib-list").innerHTML = docket.map(j => `
       <div class="trib-row ${j.cls}">
         <div class="trib-head">
           <span class="trib-id">pair #${fmt(j.id)}</span>
@@ -619,8 +814,8 @@
           <span class="trib-score">jelly ${j.score}</span>
         </div>
         <div class="gate-strip">
-          ${j.gates.map((g,i)=>`<span class="gate-dot ${g}" title="G${i+1} · ${GATE_NAMES[i]} · ${g}"></span>`).join("")}
-          <span class="gate-label">6+1 gates</span>
+          ${j.gates.map((g,i)=>`<span class="gate-dot ${g}" title="G${i+1} · ${GATE_NAMES[i]}"></span>`).join("")}
+          <span class="gate-label">6+1</span>
         </div>
         <div class="verdict ${j.cls}">${VERDICT_LABEL[j.cls]}</div>
       </div>
@@ -628,8 +823,7 @@
   }
 
   function advanceTribunal(){
-    const vert = pendingFromBatches.length ? pendingFromBatches.shift() : pick(state.verticals);
-    const j = makeJudgement(vert);
+    const j = makeJudgement();
     docket.unshift(j);
     if (docket.length > 5) docket.pop();
     state.tribunalStats[j.cls] += 1;
@@ -637,27 +831,23 @@
     renderTribStats();
   }
 
-  setInterval(advanceTribunal, 1400);
-
   // ── RULINGS TICKER ─────────────────────────────────
   const rulings = [];
-  // Seed a few rulings so the ticker isn't empty on first paint
-  for (let i=0; i<10; i++) {
-    const pairs = rnd(300, 1600);
-    const rj  = Math.round(pairs*0.22);
-    const h   = Math.round(pairs*0.42);
-    const p   = Math.round(pairs*0.23);
-    const rej = pairs - rj - h - p;
+  for (let i=0; i<12; i++){
+    const pairs = rnd(600, 1800);
     rulings.push({
-      batch: state.batchSeq - 10 + i,
-      vert: pick(state.verticals),
-      rj, h, p, rej, hash:hash()
+      batch: state.batchSeq - 12 + i,
+      vert: pick(VERTICALS),
+      rj: Math.round(pairs*0.22),
+      h: Math.round(pairs*0.42),
+      p: Math.round(pairs*0.23),
+      rej: Math.round(pairs*0.13),
+      hash: hash()
     });
   }
 
   function buildTicker(){
-    const src = rulings.length ? rulings : [{batch:0,vert:"—",rj:0,h:0,p:0,rej:0,hash:hash()}];
-    const items = src.map(r => `
+    const items = rulings.map(r => `
       <span class="tick-item">
         <span class="lbl">RULED</span>
         <span class="v">#${fmt(r.batch)}</span>
@@ -669,22 +859,128 @@
         <span class="lbl">0x${r.hash}</span>
       </span>
     `);
-    // Duplicate for seamless scroll loop
     return items.concat(items).join("");
   }
-  document.getElementById("tick-track").innerHTML = buildTicker();
-  setInterval(() => {
-    document.getElementById("tick-track").innerHTML = buildTicker();
-  }, 15000);
+  el("tick-track").innerHTML = buildTicker();
+  setInterval(() => { el("tick-track").innerHTML = buildTicker(); }, 12000);
 
-  // ── INIT ───────────────────────────────────────────
+  // ── SPECIMENS (Royal Jelly samples) ────────────────
+  const SPECIMENS = [
+    {
+      vertical: "CRE · Multifamily",
+      pairId: 848291,
+      score: 0.947,
+      q: "A 312-unit Class B multifamily asset in East Memphis is listed at $28.5M — 5.2% in-place cap, 62% T3 occupancy improving from 54%, 8.2% T3 rent delinquency, 2019 vintage, $4,200/unit average rent. Seller pushes to 4.8% stabilized. Underwrite and give a verdict.",
+      a: "Kill. The T3 delinquency is the tell — you're buying a collapsing rent roll, not stabilization. At current debt costs (6.8% agency, 7.4% bridge), stabilized DSCR requires an exit cap above 6.5%, which the submarket has not cleared in 24 months. Three-scenario model yields negative IRR across all three over a 5-year hold. This is seller optimism, not a deal. Walk.",
+      gates: ["schema","dedup","leak","factual","coherence","signal","jelly"],
+      novelty: 0.91,
+      source: "signal-edge-01",
+      batch: 4821,
+      anchor: "0x7f3a8b2c4d1e"
+    },
+    {
+      vertical: "MEDICAL · Oncology",
+      pairId: 848097,
+      score: 0.923,
+      q: "61-year-old patient, stage IIIB NSCLC, PD-L1 TPS 35%, EGFR and ALK negative, comorbid CHF with LVEF 40%. What are the first-line options?",
+      a: "Pembrolizumab monotherapy is not supported at TPS 35% (threshold ≥50%). First-line standard is platinum-doublet chemotherapy plus pembrolizumab per KEYNOTE-189/407. LVEF 40% excludes anthracyclines, but carboplatin + paclitaxel + pembrolizumab is appropriate. Concurrent chemoradiation candidacy depends on mediastinal involvement — consult radiation oncology before systemic start.",
+      gates: ["schema","dedup","leak","factual","coherence","signal","jelly"],
+      novelty: 0.88,
+      source: "openalex",
+      batch: 4819,
+      anchor: "0x2e9d4a7f1b63"
+    },
+    {
+      vertical: "AVIATION · Incident analysis",
+      pairId: 847986,
+      score: 0.912,
+      q: "B737-800 on final approach, 1,800 ft AGL, localizer captured but glideslope flag. FO calls it. CA continues: 'We're on speed, runway in sight.' What's the failure mode?",
+      a: "Non-precision approach procedure was not briefed or reconfigured. Glideslope flag without a callout to revert to LOC-only descent means the crew is flying a visual off a partial approach — CFIT risk, especially in reduced visibility. Standard calls for go-around, or reconfigure to LOC minimums with published MDA. Continuation bias plus authority gradient. Root cause: briefing incompleteness, not a technical failure.",
+      gates: ["schema","dedup","leak","factual","coherence","signal","jelly"],
+      novelty: 0.86,
+      source: "ASRS",
+      batch: 4823,
+      anchor: "0x9c5e1d8a7f42"
+    },
+    {
+      vertical: "GRANT · NSF strategy",
+      pairId: 848145,
+      score: 0.931,
+      q: "Seed-stage AI startup, 4 FTE, TRL 3, no prior federal awards, evaluating NSF SBIR Phase I ($275K). Realistic?",
+      a: "Yes, but only if you pick the right topic code. Generic AI/ML pitches get crowded out. Target a DCL topic aligned to a cognizant PM, not the open call — shorter review cycle, higher pick rate. Skip the fundraising deck; NSF wants a technical narrative plus commercialization plan. Submit after a 15-minute PM call, not cold. Award turnaround 5–6 months; plan runway accordingly.",
+      gates: ["schema","dedup","leak","factual","coherence","signal","jelly"],
+      novelty: 0.89,
+      source: "nsf-awards",
+      batch: 4817,
+      anchor: "0x4b8a2c7e9d13"
+    },
+    {
+      vertical: "CREDIT · Corporate",
+      pairId: 848204,
+      score: 0.918,
+      q: "Private regional bank, $4.8B assets, 38% CRE concentration, ACL coverage 1.1%, classified assets up 42% YoY. Credit view on senior unsecured?",
+      a: "Negative. 38% CRE with 42% classified-asset growth and only 1.1% ACL is a three-signal stress pattern, not a snapshot. Peer ACL is trending 1.4–1.8% on similar books; underprovisioning masks credit migration. Expect a Q2–Q3 reserve build of 40–60 bps, compressing NIM into an already-pressured earnings cycle. Fed exam letters in this profile typically force capital action within 12 months. Underweight unsecured, avoid subordinated.",
+      gates: ["schema","dedup","leak","factual","coherence","signal","jelly"],
+      novelty: 0.87,
+      source: "FDIC-call-reports",
+      batch: 4818,
+      anchor: "0x6d7e3f2a1c84"
+    }
+  ];
+
+  let specIdx = 0;
+  function renderSpecimen(){
+    const s = SPECIMENS[specIdx];
+    el("spec-card").innerHTML = `
+      <div class="spec-meta">
+        <span class="spec-verdict">◆ Royal Jelly</span>
+        <span class="spec-field">pair <b>#${fmt(s.pairId)}</b></span>
+        <span class="spec-field">vertical <b>${s.vertical}</b></span>
+        <span class="spec-field">JellyScore <b style="color:var(--gold)">${s.score}</b></span>
+        <span class="spec-field">novelty <b>${s.novelty}</b></span>
+      </div>
+      <div class="spec-q-label">Prompt</div>
+      <div class="spec-q">${s.q}</div>
+      <div class="spec-a-label">Response — adjudicated</div>
+      <div class="spec-a">${s.a}</div>
+      <div class="spec-gates">
+        <span class="gl">Gates 7/7 pass:</span>
+        ${s.gates.map(g => `<span class="spec-gate">✓ ${g}</span>`).join("")}
+      </div>
+      <div class="spec-prov">
+        <span class="k">source</span><span class="v">${s.source}</span> ·
+        <span class="k">batch</span><span class="v">#${fmt(s.batch)}</span> ·
+        <span class="k">tribunal</span><span class="v">sealed</span> ·
+        <span class="k">anchor</span><span class="v">${s.anchor}</span>
+      </div>
+    `;
+    el("spec-nav").innerHTML = SPECIMENS.map((_,i) =>
+      `<span class="spec-dot ${i===specIdx?"active":""}" data-i="${i}"></span>`
+    ).join("");
+    document.querySelectorAll(".spec-dot").forEach(d =>
+      d.addEventListener("click", () => { specIdx = +d.dataset.i; renderSpecimen(); })
+    );
+  }
+  setInterval(() => {
+    specIdx = (specIdx + 1) % SPECIMENS.length;
+    renderSpecimen();
+  }, 9000);
+
+  // ── INIT + LOOPS ───────────────────────────────────
   renderMiners();
-  renderBlocks();
+  updateFleet();
+  renderHive();
+  renderHiveMeta();
+  renderTape();
   renderCounter();
   renderTribStats();
-  // Seed docket with a few rows so first paint isn't empty
   for (let i=0; i<5; i++) docket.push(makeJudgement());
   renderDocket();
+  renderSpecimen();
+
+  setInterval(tickMiners, 4000);
+  setInterval(tickHive, 700);
+  setInterval(advanceTribunal, 1400);
 })();
 </script>
 
