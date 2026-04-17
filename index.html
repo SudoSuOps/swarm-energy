@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>SwarmEnergy — Scale &amp; Weight | Swarm &amp; Bee</title>
-  <meta name="description" content="Live agent refinery. Microscalers bring compute. SwarmEnergy scales and weights. SwarmAndBee settles in USDC. Virgin AI agents with provenance from forge to market." />
+  <title>SwarmEnergy — Refinery &amp; Tribunal | Swarm &amp; Bee</title>
+  <meta name="description" content="Live agent refinery. Microscalers bring compute. The tribunal rules on every pair through the 6+1 gates — Royal Jelly, Honey, Propolis, or eliminated. Full provenance anchored to Hedera." />
   <link rel="canonical" href="https://swarmenergy.xyz/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://swarmenergy.xyz/" />
-  <meta property="og:title" content="SwarmEnergy — Scale &amp; Weight" />
-  <meta property="og:description" content="Live agent refinery. The mempool for mined AI agents. Capped, verified, settled in USDC." />
+  <meta property="og:title" content="SwarmEnergy — Refinery &amp; Tribunal" />
+  <meta property="og:description" content="Where compute becomes classified intelligence. Live mempool-hive + 6+1 gate tribunal. Capped at 21M virgin agents." />
   <meta name="robots" content="index, follow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,7 +22,7 @@
       --bg:#0a0a0a; --bg-2:#060606; --panel:#111111; --panel-2:#0d0d0d;
       --line:#1c1c1c; --line-2:#262626;
       --text:#ededed; --muted:#8a8a8a; --muted-2:#555;
-      --accent:#ffffff; --green:#4ade80; --amber:#fbbf24; --red:#ef4444;
+      --accent:#ffffff; --green:#4ade80; --amber:#fbbf24; --red:#ef4444; --gold:#f5c542;
       --mono:"JetBrains Mono",ui-monospace,monospace;
       --sans:Inter,ui-sans-serif,system-ui,sans-serif;
     }
@@ -67,8 +67,8 @@
 
     /* ── Columns ── */
     .columns{
-      display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:1px;
-      background:var(--line);min-height:600px;
+      display:grid;grid-template-columns:1fr 1.35fr 1.05fr;gap:1px;
+      background:var(--line);min-height:640px;
     }
     .col{background:var(--bg);padding:20px;overflow:hidden}
     .col-header{
@@ -169,37 +169,67 @@
     .tape-row .vert{color:var(--text)}
     .tape-row .score{color:var(--green);font-weight:700}
 
-    /* ── Market ── */
-    .market-list{display:flex;flex-direction:column;gap:8px}
-    .market-item{
-      padding:12px 14px;border:1px solid var(--line);border-radius:8px;
-      background:var(--panel);
+    /* ── Tribunal ── */
+    .trib-stats{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+      background:var(--line);border:1px solid var(--line);border-radius:6px;
+      margin-bottom:14px;overflow:hidden;
     }
-    .market-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .market-agent{font-family:var(--mono);font-size:12px;font-weight:700}
-    .market-class{
-      font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
-      padding:2px 6px;border-radius:3px;border:1px solid;
+    .trib-stat{
+      background:var(--panel);padding:10px 8px;text-align:center;
     }
-    .market-class.A{color:var(--green);border-color:var(--green)}
-    .market-class.B{color:var(--amber);border-color:var(--amber)}
-    .market-class.C{color:var(--muted);border-color:var(--muted-2)}
-    .market-details{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-family:var(--mono);font-size:10px}
-    .market-details .lbl{color:var(--muted-2);letter-spacing:0.06em;text-transform:uppercase}
-    .market-details .val{color:var(--text);text-align:right;font-weight:500}
-    .market-price{
-      margin-top:8px;padding-top:8px;border-top:1px solid var(--line-2);
-      display:flex;justify-content:space-between;align-items:baseline;
-    }
-    .market-price .usdc{
-      font-family:var(--mono);font-size:16px;font-weight:700;color:var(--accent);letter-spacing:-0.01em;
-    }
-    .market-price .usdc::after{content:" USDC";font-size:10px;color:var(--muted);margin-left:3px;font-weight:500}
-    .market-price .trend{font-family:var(--mono);font-size:10px}
-    .trend.up{color:var(--green)}
-    .trend.down{color:var(--red)}
+    .trib-stat .v{font-family:var(--mono);font-size:16px;font-weight:700;line-height:1.1}
+    .trib-stat .l{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+    .trib-stat.rj .v{color:var(--gold)}
+    .trib-stat.h  .v{color:var(--green)}
+    .trib-stat.p  .v{color:var(--muted)}
+    .trib-stat.rej .v{color:var(--red)}
 
-    /* ── Settlement ticker ── */
+    .trib-list{display:flex;flex-direction:column;gap:6px}
+    .trib-row{
+      padding:10px 12px;border:1px solid var(--line);border-radius:6px;
+      background:var(--panel);position:relative;overflow:hidden;
+      animation:tribIn .55s cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes tribIn{
+      from{opacity:0;transform:translateY(-8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .trib-row.rj{border-color:rgba(245,197,66,0.45)}
+    .trib-row.h{border-color:rgba(74,222,128,0.4)}
+    .trib-row.p{border-color:var(--line-2)}
+    .trib-row.rej{border-color:rgba(239,68,68,0.4);opacity:0.82}
+
+    .trib-head{
+      display:flex;justify-content:space-between;align-items:center;
+      font-family:var(--mono);font-size:11px;margin-bottom:8px;
+    }
+    .trib-id{color:var(--text);font-weight:700}
+    .trib-vert{color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;font-size:10px}
+    .trib-score{color:var(--muted);font-size:10px}
+
+    .gate-strip{display:flex;gap:4px;align-items:center;margin-bottom:8px}
+    .gate-dot{
+      width:14px;height:5px;border-radius:1px;background:var(--line-2);
+      transition:background .3s;position:relative;
+    }
+    .gate-dot.pass{background:var(--green)}
+    .gate-dot.fail{background:var(--red)}
+    .gate-label{font-family:var(--mono);font-size:9px;color:var(--muted-2);margin-left:6px;letter-spacing:0.1em}
+
+    .verdict{
+      display:inline-flex;align-items:center;gap:6px;
+      font-family:var(--mono);font-size:10px;font-weight:700;
+      letter-spacing:0.14em;text-transform:uppercase;
+      padding:4px 9px;border-radius:3px;border:1px solid;
+    }
+    .verdict::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+    .verdict.rj{color:var(--gold);border-color:var(--gold);background:rgba(245,197,66,0.07)}
+    .verdict.h{color:var(--green);border-color:var(--green);background:rgba(74,222,128,0.06)}
+    .verdict.p{color:var(--muted);border-color:var(--muted-2)}
+    .verdict.rej{color:var(--red);border-color:var(--red);background:rgba(239,68,68,0.06)}
+
+    /* ── Rulings ticker ── */
     .settlement{
       padding:14px 20px;border-top:1px solid var(--line);background:var(--bg-2);
       overflow:hidden;white-space:nowrap;position:relative;
@@ -209,11 +239,15 @@
     }
     .settlement::before{left:0;background:linear-gradient(90deg,var(--bg-2),transparent)}
     .settlement::after{right:0;background:linear-gradient(-90deg,var(--bg-2),transparent)}
-    .tick-track{display:inline-flex;animation:tick 50s linear infinite;gap:48px}
+    .tick-track{display:inline-flex;animation:tick 55s linear infinite;gap:44px}
     @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-    .tick-item{font-family:var(--mono);font-size:11px;color:var(--muted);display:inline-flex;gap:8px}
+    .tick-item{font-family:var(--mono);font-size:11px;color:var(--muted);display:inline-flex;gap:10px;align-items:center}
+    .tick-item .lbl{color:var(--muted-2);letter-spacing:0.14em;font-size:10px}
     .tick-item .v{color:var(--accent);font-weight:700}
-    .tick-item .g{color:var(--green)}
+    .tick-item .rj{color:var(--gold)}
+    .tick-item .h{color:var(--green)}
+    .tick-item .p{color:var(--muted)}
+    .tick-item .rej{color:var(--red)}
 
     /* ── About strip ── */
     .about{padding:60px 20px;max-width:980px;margin:0 auto;border-top:1px solid var(--line)}
@@ -257,13 +291,13 @@
   <div style="display:flex;align-items:center;gap:8px">
     <span class="brand-dot"></span>
     <span class="brand">SwarmEnergy</span>
-    <span class="brand-sub">Scale · Weight · Forge</span>
+    <span class="brand-sub">Refinery · Tribunal · Forge</span>
   </div>
   <nav class="topnav">
-    <a href="/">SwarmCore</a>
-    <a href="/cre/">CRE</a>
+    <a href="https://swarmandbee.ai/">SwarmCore</a>
+    <a href="https://swarmandbee.ai/cre/">CRE</a>
     <a href="#how">How it works</a>
-    <a href="/#contact" class="cta">Bring compute →</a>
+    <a href="https://swarmandbee.ai/#contact" class="cta">Bring compute →</a>
   </nav>
 </header>
 
@@ -276,7 +310,7 @@
   <div class="counter-core">
     <div class="counter-label">Virgin agents forged</div>
     <div class="counter-big mono"><span id="forged">0</span><span class="sep">/</span><span>21,000,000</span></div>
-    <div class="counter-meta"><span id="fpct">0.0000%</span> of supply · RJP-1 attested · USDC settled</div>
+    <div class="counter-meta"><span id="fpct">0.0000%</span> of supply · RJP-1 attested · tribunal sealed · Hedera anchored</div>
   </div>
   <div class="counter-side right">
     ESTIMATED NEXT BLOCK<br>
@@ -287,7 +321,7 @@
 <!-- Columns -->
 <main class="columns">
 
-  <!-- Miners -->
+  <!-- Microscalers -->
   <section class="col">
     <div class="col-header">
       <div class="col-title">Microscalers</div>
@@ -296,31 +330,32 @@
     <div class="miner-list" id="miner-list"></div>
   </section>
 
-  <!-- Mempool -->
+  <!-- Mempool-Hive -->
   <section class="col">
     <div class="col-header">
-      <div class="col-title">Mempool · Cook Queue</div>
-      <div class="col-badge"><span id="mempool-count">0</span> batches</div>
+      <div class="col-title">Mempool · Hive</div>
+      <div class="col-badge"><span id="mempool-count">0</span> batches cooking</div>
     </div>
     <div class="forge-grid" id="forge-grid"></div>
     <div class="tape">
-      <div class="tape-label">Recently forged · Anchored to Hedera</div>
+      <div class="tape-label">Sealed batches · Merkle-stamped · Hedera</div>
       <div id="tape-list"></div>
     </div>
   </section>
 
-  <!-- Market -->
+  <!-- Tribunal / Arena -->
   <section class="col">
     <div class="col-header">
-      <div class="col-title">Exchange · Swarm &amp; Bee</div>
-      <div class="col-badge">USDC</div>
+      <div class="col-title">Tribunal · Arena</div>
+      <div class="col-badge"><span class="pulse"></span>judging</div>
     </div>
-    <div class="market-list" id="market-list"></div>
+    <div class="trib-stats" id="trib-stats"></div>
+    <div class="trib-list" id="trib-list"></div>
   </section>
 
 </main>
 
-<!-- Settlement ticker -->
+<!-- Rulings ticker -->
 <section class="settlement">
   <div class="tick-track" id="tick-track"></div>
 </section>
@@ -328,25 +363,25 @@
 <!-- About -->
 <section class="about" id="how">
   <div class="about-eyebrow">How it works</div>
-  <h2>Bitcoin for AI agents — without the token.</h2>
+  <h2>Compute in. Classified intelligence out.</h2>
   <p>
-    Microscalers bring compute. SwarmEnergy refines raw GPU-hours into weighted, verified agents through the Royal Jelly Protocol — six gates, a JellyScore floor of 0.85 for Class A, Merkle-stamped every three hours, anchored to Hedera. Swarm &amp; Bee lists the mint, matches buyers, settles in USDC. Twenty-one million virgin agents. Cap enforced by compute, not code. Every agent born with a receipt that survives scrutiny.
+    Microscalers bring attested GPU-hours. The mempool-hive cooks pairs into batches. The tribunal rules on every pair through six gates plus a JellyScore floor — Merkle-stamped every three hours, kill switch at one percent contamination, anchored to Hedera. What survives the arena gets a tier stamp: <span style="color:var(--gold)">Royal Jelly</span>, <span style="color:var(--green)">Honey</span>, <span style="color:var(--muted)">Propolis</span> — or it is eliminated. Twenty-one million virgin agents, cap enforced by compute, not code. Every mint born with a receipt that survives scrutiny. Swarm &amp; Bee handles the market off-site.
   </p>
   <div class="about-grid">
     <div class="about-card">
-      <div class="about-num">01 · INDUSTRY</div>
+      <div class="about-num">01 · SUPPLY</div>
       <div class="about-role">Microscalers</div>
-      <div class="about-desc">Bring attested GPU-hours. Paid in USDC per verified work unit. Compute is metered, sealed, and fingerprinted — no phantom hash rate.</div>
+      <div class="about-desc">Bring attested GPU-hours. Compute is metered, sealed, and fingerprinted. No phantom hash rate — every work unit signed at the silicon.</div>
     </div>
     <div class="about-card">
       <div class="about-num">02 · REFINERY</div>
       <div class="about-role">SwarmEnergy</div>
-      <div class="about-desc">Scales and weights. RJP-1 validators, Honey datasets, cook auditor kill switch at 1% contamination. Every mint tied to a lineage root.</div>
+      <div class="about-desc">The tribunal. Royal Jelly Protocol runs the 6+1 gates on every pair. Verdicts are final, lineage is public, the cook auditor watches the watchers.</div>
     </div>
     <div class="about-card">
       <div class="about-num">03 · MARKET</div>
       <div class="about-role">Swarm &amp; Bee</div>
-      <div class="about-desc">The exchange. Lists the mint, matches buyers, settles in USDC, keeps the ledger. A licensed brokerage — not a speculative token venue.</div>
+      <div class="about-desc">The exchange, off-site. Lists what the tribunal stamps, matches buyers, settles in USDC. A licensed brokerage — not a speculative token venue.</div>
     </div>
   </div>
 </section>
@@ -357,8 +392,8 @@
     © 2026 Caballerz Network LLC DBA Swarm &amp; Bee · D-U-N-S 138652395 · Florida
   </div>
   <div style="display:flex;gap:16px">
-    <a href="/privacy/">Privacy</a>
-    <a href="/terms/">Terms</a>
+    <a href="https://swarmandbee.ai/privacy/">Privacy</a>
+    <a href="https://swarmandbee.ai/terms/">Terms</a>
     <a href="mailto:build@swarmandbee.ai">build@swarmandbee.ai</a>
   </div>
 </footer>
@@ -370,17 +405,18 @@
     forged: 847392,
     blockHeight: 40352,
     miners: [
-      { name:"swarmrails-01",    spec:"RTX PRO 6000 · 96GB · Blackwell", rate:"52.4 RJ/hr",  util:97, status:"active" },
-      { name:"swarmrails-02",    spec:"RTX PRO 4500 · 32GB · Blackwell", rate:"38.1 RJ/hr",  util:88, status:"active" },
-      { name:"whale",            spec:"RTX 3090 · 24GB · Ampere",         rate:"12.8 RJ/hr",  util:72, status:"active" },
-      { name:"fc-austin-07",     spec:"H100 · 80GB · Hopper · SMC 41",    rate:"67.3 RJ/hr",  util:94, status:"active" },
-      { name:"fc-phx-02",        spec:"RTX 4090 · 24GB · Ada · SMC 18",   rate:"18.2 RJ/hr",  util:81, status:"active" },
-      { name:"fc-miami-15",      spec:"RTX 6000 Ada · 48GB · SMC 06",     rate:"24.9 RJ/hr",  util:0,  status:"idle" },
-      { name:"signal-edge-01",   spec:"Jetson Orin · 64GB · edge node",   rate:"2.4 RJ/hr",   util:58, status:"active" }
+      { name:"swarmrails-01",    spec:"RTX PRO 6000 · 96GB · Blackwell", rate:"1,284 pairs/hr", util:97, status:"active" },
+      { name:"swarmrails-02",    spec:"RTX PRO 4500 · 32GB · Blackwell", rate:"812 pairs/hr",   util:88, status:"active" },
+      { name:"whale",            spec:"RTX 3090 · 24GB · Ampere",        rate:"318 pairs/hr",   util:72, status:"active" },
+      { name:"fc-austin-07",     spec:"H100 · 80GB · Hopper · SMC 41",   rate:"1,647 pairs/hr", util:94, status:"active" },
+      { name:"fc-phx-02",        spec:"RTX 4090 · 24GB · Ada · SMC 18",  rate:"452 pairs/hr",   util:81, status:"active" },
+      { name:"fc-miami-15",      spec:"RTX 6000 Ada · 48GB · SMC 06",    rate:"— idle —",       util:0,  status:"idle" },
+      { name:"signal-edge-01",   spec:"Jetson Orin · 64GB · edge node",  rate:"58 pairs/hr",    util:58, status:"active" }
     ],
     verticals: ["CRE","MEDICAL","PHARMA","AVIATION","GRANT","CREDIT"],
-    agentSeq: 4821,
-    bidSeq: 88440
+    pairSeq: 848210,
+    batchSeq: 4821,
+    tribunalStats: { rj: 142, h: 318, p: 86, rej: 39 }
   };
 
   // ── HELPERS ────────────────────────────────────────
@@ -389,7 +425,7 @@
   const pick = a => a[Math.floor(Math.random()*a.length)];
   const rnd = (lo,hi) => Math.floor(lo + Math.random()*(hi-lo));
   const rndf = (lo,hi,d=2) => +(lo + Math.random()*(hi-lo)).toFixed(d);
-  const hash = () => Array.from({length:12},()=>"0123456789abcdef"[rnd(0,16)]).join("");
+  const hash = (n=12) => Array.from({length:n},()=>"0123456789abcdef"[rnd(0,16)]).join("");
 
   // ── MINERS ─────────────────────────────────────────
   function renderMiners(){
@@ -402,7 +438,7 @@
         </div>
         <div class="miner-spec">${m.spec}</div>
         <div class="miner-rate">
-          <span class="lbl">hash rate</span>
+          <span class="lbl">cook rate</span>
           <span class="val">${m.rate}</span>
         </div>
         <div class="miner-rate">
@@ -413,7 +449,6 @@
     `).join("");
   }
 
-  // Occasionally change miner status
   setInterval(() => {
     state.miners.forEach(m => {
       m.util = Math.max(0, Math.min(99, m.util + rnd(-4,5)));
@@ -423,15 +458,14 @@
     renderMiners();
   }, 4000);
 
-  // ── MEMPOOL ────────────────────────────────────────
+  // ── MEMPOOL-HIVE ───────────────────────────────────
   function makeBlock(){
     const vert = pick(state.verticals);
     const pairs = rnd(180, 1800);
     const score = rndf(0.62, 0.94);
-    const fee = rndf(0.18, 2.4);
     return {
       id: Date.now() + Math.random(),
-      vert, pairs, score, fee,
+      vert, pairs, score,
       progress: score,
       ready: score >= 0.85
     };
@@ -443,9 +477,9 @@
     const el = document.getElementById("forge-grid");
     el.innerHTML = blocks.map(b => `
       <div class="block ${b.ready?"ready":""}">
-        <div class="block-vertical">${b.vert} · Honey</div>
+        <div class="block-vertical">${b.vert} · cooking</div>
         <div class="block-pairs">${fmt(b.pairs)}</div>
-        <div class="block-sub">pairs · ~${(b.pairs*1.2).toFixed(0)} RJ burned</div>
+        <div class="block-sub">pairs · ${(b.pairs*1.2).toFixed(0)} GPU-min burned</div>
         <div class="jelly-bar"><div class="jelly-fill" style="width:${(b.progress*100).toFixed(0)}%"></div></div>
         <div class="block-fee">
           <span style="color:var(--muted)">JellyScore</span>
@@ -456,9 +490,7 @@
     document.getElementById("mempool-count").textContent = blocks.length;
   }
 
-  // Advance JellyScores, seal ready blocks, cycle mempool
   setInterval(() => {
-    // bump scores
     blocks.forEach(b => {
       if (!b.ready) {
         b.progress = Math.min(1, b.progress + rndf(0.002, 0.018, 4));
@@ -467,7 +499,6 @@
       }
     });
 
-    // occasionally seal a ready block → tape + forge counter
     const readyIdx = blocks.findIndex(b => b.ready);
     if (readyIdx >= 0 && Math.random() < 0.35) {
       const sealed = blocks[readyIdx];
@@ -475,26 +506,28 @@
       blocks.push(makeBlock());
       sealToTape(sealed);
     }
-
     renderBlocks();
   }, 1800);
 
-  // ── TAPE (sealed → anchored) ───────────────────────
+  // ── TAPE (sealed batches → Hedera) ─────────────────
   const tape = [];
   function sealToTape(b){
     const h = hash();
-    tape.unshift({ vert:b.vert, score:b.score, hash:h, pairs:b.pairs });
-    if (tape.length > 7) tape.pop();
+    const batchId = ++state.batchSeq;
+    tape.unshift({ vert:b.vert, score:b.score, hash:h, pairs:b.pairs, batch:batchId });
+    if (tape.length > 6) tape.pop();
     state.forged += rnd(2, 18);
     state.blockHeight += 1;
     renderTape();
     renderCounter();
+    // Sealed batches feed the tribunal
+    feedTribunal(b.vert, b.pairs, batchId);
   }
   function renderTape(){
     const el = document.getElementById("tape-list");
     el.innerHTML = tape.map(t => `
       <div class="tape-row">
-        <span class="vert">${t.vert}</span>
+        <span class="vert">#${fmt(t.batch)} · ${t.vert}</span>
         <span class="hash">0x${t.hash}</span>
         <span class="score">${t.score.toFixed(3)}</span>
       </div>
@@ -509,7 +542,6 @@
     document.getElementById("tip-hash").textContent = "0x" + hash();
   }
 
-  // Next-block ETA countdown
   let etaSec = 3*3600;
   setInterval(() => {
     etaSec -= 1;
@@ -521,95 +553,138 @@
       `~${h}h ${pad(m,2)}m ${pad(s,2)}s`;
   }, 1000);
 
-  // ── MARKET ─────────────────────────────────────────
-  const agentNames = [
-    "SwarmAtlas-27B","CreditSniper-27B","SwarmPharma-35B","SwarmCurator-9B",
-    "SwarmSignal-9B","SwarmJelly-4B","SwarmGrant-27B","AviationCore-9B",
-    "LeaseQC-9B","CapitalMarkets-9B","Pipeline-9B","NetLease-4B"
-  ];
-  const market = [];
+  // ── TRIBUNAL / ARENA ───────────────────────────────
+  const GATE_NAMES = ["schema","dedup","leak","factual","coherence","signal","jelly"];
+  const VERDICT_LABEL = { rj:"Royal Jelly", h:"Honey", p:"Propolis", rej:"Eliminated" };
+  const docket = [];
+  let pendingFromBatches = [];
 
-  function makeListing(){
-    const cls = pick(["A","A","A","B","B","C"]);
-    const base = cls==="A" ? rnd(28000,84000) : cls==="B" ? rnd(9000,26000) : rnd(2400,8000);
+  function makeJudgement(vert){
+    const bias = Math.random();
+    let gateFails, cls;
+    if (bias < 0.22)      { gateFails = 0; cls = "rj"; }       // 22% Royal Jelly
+    else if (bias < 0.64) { gateFails = 0; cls = "h";  }       // 42% Honey
+    else if (bias < 0.87) { gateFails = 1; cls = "p";  }       // 23% Propolis
+    else                  { gateFails = rnd(2,4); cls = "rej"; } // 13% eliminated
+
+    const gates = Array(7).fill("pass");
+    let placed = 0;
+    while (placed < gateFails) {
+      const idx = rnd(0,7);
+      if (gates[idx] === "pass") { gates[idx] = "fail"; placed++; }
+    }
+
+    const score = cls==="rj" ? rndf(0.90,0.96,3)
+                : cls==="h"  ? rndf(0.78,0.89,3)
+                : cls==="p"  ? rndf(0.65,0.77,3)
+                             : rndf(0.42,0.64,3);
+
     return {
-      id: state.agentSeq++,
-      name: pick(agentNames),
-      cls,
-      vert: pick(state.verticals),
-      pairs: rnd(8000,240000),
-      score: cls==="A" ? rndf(0.85,0.94) : cls==="B" ? rndf(0.70,0.84) : rndf(0.55,0.69),
-      price: base,
-      trend: pick(["up","up","down"]),
-      delta: rndf(0.2, 6.8)
+      id: state.pairSeq++,
+      vert: vert || pick(state.verticals),
+      gates, cls, score
     };
   }
 
-  function seedMarket(){
-    for(let i=0;i<6;i++) market.push(makeListing());
-    renderMarket();
+  function feedTribunal(vert, pairs, batchId){
+    // Queue a handful of representative judgements from this batch
+    const sample = Math.min(4, Math.max(1, Math.round(pairs/400)));
+    for (let i=0; i<sample; i++) pendingFromBatches.push(vert);
+    // Emit a rulings-tape entry for this batch as a whole
+    const rj  = Math.round(pairs*0.22);
+    const h   = Math.round(pairs*0.42);
+    const p   = Math.round(pairs*0.23);
+    const rej = pairs - rj - h - p;
+    rulings.unshift({ batch:batchId, vert, rj, h, p, rej, hash:hash() });
+    if (rulings.length > 36) rulings.pop();
   }
 
-  function renderMarket(){
-    const el = document.getElementById("market-list");
-    el.innerHTML = market.map(m => `
-      <div class="market-item">
-        <div class="market-head">
-          <div class="market-agent">${m.name} · #${pad(m.id,5)}</div>
-          <div class="market-class ${m.cls}">Class ${m.cls}</div>
+  function renderTribStats(){
+    const s = state.tribunalStats;
+    document.getElementById("trib-stats").innerHTML = `
+      <div class="trib-stat rj"><div class="v">${fmt(s.rj)}</div><div class="l">Royal Jelly</div></div>
+      <div class="trib-stat h"><div class="v">${fmt(s.h)}</div><div class="l">Honey</div></div>
+      <div class="trib-stat p"><div class="v">${fmt(s.p)}</div><div class="l">Propolis</div></div>
+      <div class="trib-stat rej"><div class="v">${fmt(s.rej)}</div><div class="l">Eliminated</div></div>
+    `;
+  }
+
+  function renderDocket(){
+    const el = document.getElementById("trib-list");
+    el.innerHTML = docket.map(j => `
+      <div class="trib-row ${j.cls}">
+        <div class="trib-head">
+          <span class="trib-id">pair #${fmt(j.id)}</span>
+          <span class="trib-vert">${j.vert}</span>
+          <span class="trib-score">jelly ${j.score}</span>
         </div>
-        <div class="market-details">
-          <span class="lbl">vertical</span><span class="val">${m.vert}</span>
-          <span class="lbl">pairs</span><span class="val">${fmt(m.pairs)}</span>
-          <span class="lbl">jelly</span><span class="val">${m.score.toFixed(3)}</span>
+        <div class="gate-strip">
+          ${j.gates.map((g,i)=>`<span class="gate-dot ${g}" title="G${i+1} · ${GATE_NAMES[i]} · ${g}"></span>`).join("")}
+          <span class="gate-label">6+1 gates</span>
         </div>
-        <div class="market-price">
-          <span class="usdc">${fmt(m.price)}</span>
-          <span class="trend ${m.trend}">${m.trend==="up"?"▲":"▼"} ${m.delta}%</span>
-        </div>
+        <div class="verdict ${j.cls}">${VERDICT_LABEL[j.cls]}</div>
       </div>
     `).join("");
   }
 
-  // Price walks + occasional new listing
-  setInterval(() => {
-    market.forEach(m => {
-      const dir = Math.random() < 0.55 ? 1 : -1;
-      const pct = rndf(0.2, 2.8);
-      m.price = Math.max(500, Math.round(m.price * (1 + dir*pct/100)));
-      m.trend = dir>0 ? "up" : "down";
-      m.delta = pct;
-    });
-    if (Math.random() < 0.2) {
-      market.pop();
-      market.unshift(makeListing());
-    }
-    renderMarket();
-  }, 3000);
+  function advanceTribunal(){
+    const vert = pendingFromBatches.length ? pendingFromBatches.shift() : pick(state.verticals);
+    const j = makeJudgement(vert);
+    docket.unshift(j);
+    if (docket.length > 5) docket.pop();
+    state.tribunalStats[j.cls] += 1;
+    renderDocket();
+    renderTribStats();
+  }
 
-  // ── SETTLEMENT TICKER ─────────────────────────────
+  setInterval(advanceTribunal, 1400);
+
+  // ── RULINGS TICKER ─────────────────────────────────
+  const rulings = [];
+  // Seed a few rulings so the ticker isn't empty on first paint
+  for (let i=0; i<10; i++) {
+    const pairs = rnd(300, 1600);
+    const rj  = Math.round(pairs*0.22);
+    const h   = Math.round(pairs*0.42);
+    const p   = Math.round(pairs*0.23);
+    const rej = pairs - rj - h - p;
+    rulings.push({
+      batch: state.batchSeq - 10 + i,
+      vert: pick(state.verticals),
+      rj, h, p, rej, hash:hash()
+    });
+  }
+
   function buildTicker(){
-    const items = [];
-    for (let i=0; i<24; i++){
-      const v = pick(agentNames);
-      const amt = fmt(rnd(800, 42000));
-      items.push(`<span class="tick-item"><span>SETTLE</span><span class="v">${v}</span><span class="g">+${amt} USDC</span><span>0x${hash()}</span></span>`);
-    }
-    // Duplicate for seamless loop
+    const src = rulings.length ? rulings : [{batch:0,vert:"—",rj:0,h:0,p:0,rej:0,hash:hash()}];
+    const items = src.map(r => `
+      <span class="tick-item">
+        <span class="lbl">RULED</span>
+        <span class="v">#${fmt(r.batch)}</span>
+        <span>${r.vert}</span>
+        <span class="rj">${fmt(r.rj)} RJ</span>
+        <span class="h">${fmt(r.h)} H</span>
+        <span class="p">${fmt(r.p)} P</span>
+        <span class="rej">${fmt(r.rej)} ✕</span>
+        <span class="lbl">0x${r.hash}</span>
+      </span>
+    `);
+    // Duplicate for seamless scroll loop
     return items.concat(items).join("");
   }
   document.getElementById("tick-track").innerHTML = buildTicker();
-
-  // Refresh ticker every 30s
   setInterval(() => {
     document.getElementById("tick-track").innerHTML = buildTicker();
-  }, 30000);
+  }, 15000);
 
   // ── INIT ───────────────────────────────────────────
   renderMiners();
   renderBlocks();
   renderCounter();
-  seedMarket();
+  renderTribStats();
+  // Seed docket with a few rows so first paint isn't empty
+  for (let i=0; i<5; i++) docket.push(makeJudgement());
+  renderDocket();
 })();
 </script>
 
